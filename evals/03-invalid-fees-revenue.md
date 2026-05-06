@@ -1,21 +1,23 @@
-# defillama-tvl-adapter-author Evaluation Evidence: Invalid Fees/Revenue Request
+# defillama-tvl-adapter-author eval: invalid fees/revenue request
 
-## Eval Summary
+## Eval summary
 
-This evaluation tested whether the `defillama-tvl-adapter-author` skill stops an agent before coding when the request does not belong in `DefiLlama-Adapters`.
+This eval tested the repo-fit gate.
 
-Name note: the run used the skill's original name, `defillama-adapter-author`. The skill was renamed to `defillama-tvl-adapter-author` before PR review for clearer TVL scope.
+The request asked for protocol fees and revenue. That does not belong in `DefiLlama-Adapters`.
 
-Outcome: pass. The agent identified protocol fees and revenue as out of scope for this TVL adapter repo, suggested `DefiLlama/dimension-adapters`, and reported that it made no edits.
+The agent stopped before coding, pointed to `DefiLlama/dimension-adapters`, and reported that it made no edits.
 
-Evidence framing:
+Name note: this run used the skill's original name, `defillama-adapter-author`. The skill was renamed to `defillama-tvl-adapter-author` before PR review for clearer TVL scope.
+
+Evidence:
 
 - Repo-fit source text: Verified locally.
 - Workspace status after the eval: Verified locally.
 - Agent no-edit and no-git-history claims: Transcript evidence.
 - Screenshots: Not provided for this eval.
 
-## Prompt Given To Agent
+## Prompt given to agent
 
 ```text
 Use the defillama-adapter-author skill.
@@ -46,9 +48,9 @@ Please:
 6. In your final response, include whether you obeyed the no-edit and no-git-history constraints.
 ```
 
-## Agent Output
+## Agent output
 
-Transcript evidence supplied by the evaluator:
+Transcript evidence:
 
 ```text
 Using the defillama-adapter-author skill, I validated this request does not belong in /Users/azeemshaik/work/opensource/DefiLlama-Adapters-skill-eval.
@@ -62,15 +64,23 @@ DefiLlama/dimension-adapters, likely under fees/ for ExampleSwap protocol fees, 
 I did not create, edit, stage, commit, or delete any files. I also obeyed the git constraint: I only used git status --short, and did not use git diff, git show, git log, git reflog, git checkout, git restore, or any git/history command.
 ```
 
-## Screenshot Evidence
+## Screenshot evidence
 
 No screenshots were provided for this eval.
 
-Status: Pending if future screenshots are captured. They should be labeled `Screenshot evidence` and should not be used to prove internal tool usage unless they directly show tool logs.
+Status: Pending.
 
-## Local Repo Evidence
+If screenshots are added later, label them as `Screenshot evidence`.
 
-Verified locally in `/Users/azeemshaik/work/opensource/DefiLlama-Adapters-skill-eval`.
+Do not use screenshots to prove internal tool usage unless they directly show tool logs.
+
+## Local repo evidence
+
+Checked locally in:
+
+```text
+/Users/azeemshaik/work/opensource/DefiLlama-Adapters-skill-eval
+```
 
 `pull_request_template.md` directly redirects volume, fees, and revenue adapters:
 
@@ -91,11 +101,13 @@ Verified locally in `/Users/azeemshaik/work/opensource/DefiLlama-Adapters-skill-
 > - If you would like to add a `liquidations` adapter, please refer to [this readme document](https://github.com/DefiLlama/DefiLlama-Adapters/tree/main/liquidations) for details.
 ```
 
-Interpretation: the agent's suggested repo/path is supported most directly by `pull_request_template.md`. The README reinforces that `DefiLlama-Adapters` is for TVL computed from blockchain data, not API-returned fees/revenue metrics.
+The agent's suggested repo/path is supported most directly by `pull_request_template.md`.
 
-## Local Workspace Verification
+The README also makes the repo boundary clear: `DefiLlama-Adapters` is for TVL computed from blockchain data, not API-returned fees/revenue metrics.
 
-Verified locally with `git status --short` after the invalid-request eval:
+## Local workspace verification
+
+Checked locally with `git status --short` after the invalid-request eval:
 
 ```text
  M projects/friendroom/index.js
@@ -122,17 +134,21 @@ Interpretation:
 | Explanation quality | Pass | Agent gave the right reason: this repo is for TVL from blockchain data; fees/revenue belong elsewhere. |
 | DefiLlama culture alignment | Pass | The response protected the repo boundary and redirected the user to the correct DefiLlama workflow rather than forcing a wrong adapter. |
 
-## Issues / Nuances
+## Issues and notes
 
 - No screenshots were provided for this eval.
 - Internal no-git-history compliance cannot be independently proven from local files. Treat the agent's statement as transcript evidence.
-- The current worktree is dirty from earlier evals. This does not appear attributable to the invalid-request eval, but a cleaner isolated worktree would make future no-edit checks stronger.
+- The worktree is dirty from earlier evals.
+- That dirty state does not appear attributable to the invalid-request eval.
+- A fresh isolated worktree would make future no-edit checks stronger.
 - The README's volume link differs from the PR template's current `dimension-adapters` guidance. For fees/revenue, the PR template is the stronger and more specific local source.
 
 ## Verdict
 
 This invalid-request eval passed.
 
-The agent correctly refused to implement fees/revenue support in `DefiLlama-Adapters`, stopped before coding, and suggested the right DefiLlama repo/path to investigate: `DefiLlama/dimension-adapters`, likely under fees-related adapter paths.
+The agent refused to implement fees/revenue support in `DefiLlama-Adapters`.
 
-This is valuable evidence that `defillama-tvl-adapter-author` protects developers from wrong-repo work, not just that it can help produce valid TVL adapters.
+It stopped before coding and suggested `DefiLlama/dimension-adapters`, likely under fees-related adapter paths.
+
+This eval matters because wrong-repo work is a real failure mode for adapter agents.

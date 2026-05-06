@@ -1,6 +1,6 @@
 # Artifacts
 
-Supporting artifacts for the eval evidence notes.
+Artifacts used by the eval notes.
 
 ## Screenshots
 
@@ -8,5 +8,6 @@ Supporting artifacts for the eval evidence notes.
 - [twoxswap-registry-addition.png](screenshots/twoxswap-registry-addition.png): Twoxswap ERC4626 registry addition.
 - [friendroom-adapter-implementation.png](screenshots/friendroom-adapter-implementation.png): Friendroom implementation using `sumTokensExport`.
 
-Screenshots support file-level evidence. They do not prove internal command history or no-git-history compliance unless a screenshot directly shows that tool log.
+Screenshots support file-level evidence.
 
+They do not prove command history or no-git-history compliance unless a screenshot directly shows tool logs.

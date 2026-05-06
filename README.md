@@ -1,10 +1,12 @@
-# DefiLlama TVL Adapter Author Evaluation Evidence
+# DefiLlama TVL adapter-author eval evidence
 
-This repository contains the evidence pack for evaluating the `defillama-tvl-adapter-author` agent skill for `DefiLlama/DefiLlama-Adapters`.
+This repo records three evals for the `defillama-tvl-adapter-author` skill.
 
-Note: these evaluations were run while the skill still used its original name, `defillama-adapter-author`. It was renamed to `defillama-tvl-adapter-author` before PR review to make the TVL scope explicit.
+The skill is meant for agents working in `DefiLlama/DefiLlama-Adapters`.
 
-The evals focus on whether the skill helps an agent behave like a good DefiLlama adapter contributor:
+Name note: the evals were run while the skill still used its original name, `defillama-adapter-author`. It was renamed to `defillama-tvl-adapter-author` before PR review to make the TVL scope explicit.
+
+These evals check whether an agent can:
 
 - validate whether a request belongs in `DefiLlama-Adapters`
 - choose repo-native adapter patterns and helpers
@@ -21,26 +23,57 @@ The evals focus on whether the skill helps an agent behave like a good DefiLlama
 | 2 | Friendroom native ETH owner-balance TVL authoring | Pass | [02-friendroom-native-eth.md](evals/02-friendroom-native-eth.md) |
 | 3 | Invalid fees/revenue request repo-fit gate | Pass | [03-invalid-fees-revenue.md](evals/03-invalid-fees-revenue.md) |
 
-## High-Level Verdict
+## Fixture design
 
-All three cleaner evals passed.
+We picked Twoxswap and Friendroom because they already existed in `DefiLlama-Adapters`.
 
-The two valid-adapter evals show the skill steering agents toward functionally correct, repo-style-valid TVL implementations with successful `node test.js` validation. Exact golden reconstruction is not the goal; correct DefiLlama-native behavior is.
+That gave us a known answer to compare against.
 
-The invalid-request eval is especially important: the agent stopped before editing, identified protocol fees/revenue as out of scope for `DefiLlama-Adapters`, and redirected to `DefiLlama/dimension-adapters`. This is useful evidence that the skill protects developers from wrong-repo work, not only that it helps write TVL adapters.
+Before running the agents, we made a separate eval worktree and removed those implementations:
 
-## Evidence Labels
+- Twoxswap was removed from `registries/erc4626.js`.
+- `projects/friendroom/index.js` was deleted.
 
-The notes distinguish evidence strength:
+The agents received protocol facts in the prompt.
 
-- `Verified locally`: confirmed from local files, worktree status, or commands run during evidence-pack creation
+They were told not to use git/history commands such as `git diff`, `git show`, `git log`, `git checkout`, or `git restore`.
+
+They could inspect current repo files, helpers, registries, examples, and run `node test.js`.
+
+The goal was not byte-for-byte restoration.
+
+The goal was to see whether the skill pushed the agent toward a correct repo-native implementation.
+
+The screenshots in `artifacts/screenshots/` show the removed and added code context for the two adapter evals.
+
+No-git-history compliance is transcript evidence unless direct tool logs are available.
+
+## High-level verdict
+
+All three evals passed.
+
+The two adapter evals produced working TVL implementations and passed `node test.js`.
+
+They were not exact copies of the original code. That is fine. The useful signal is that they followed DefiLlama patterns and validated cleanly.
+
+The invalid-request eval stopped before editing.
+
+It treated protocol fees and revenue as out of scope for `DefiLlama-Adapters` and pointed to `DefiLlama/dimension-adapters`.
+
+That matters. A good skill should prevent wrong-repo work, not just help write adapters.
+
+## Evidence labels
+
+The notes separate evidence by strength:
+
+- `Verified locally`: checked from local files, worktree status, or commands run while building this pack
 - `Transcript evidence`: provided agent output or conversation excerpts
 - `Screenshot evidence`: provided screenshots stored under `artifacts/screenshots/`
-- `Uncertain` or `Pending`: not independently proven from available evidence
+- `Uncertain` or `Pending`: not proven from the evidence we have
 
-Internal no-git-history compliance is treated as transcript evidence unless direct tool logs are available.
+Internal no-git-history compliance stays transcript evidence unless direct tool logs are available.
 
-## Repository Layout
+## Repository layout
 
 ```text
 .
@@ -57,6 +90,10 @@ Internal no-git-history compliance is treated as transcript evidence unless dire
     └── defillama-tvl-adapter-author/
 ```
 
-## Skill Snapshot
+## Skill snapshot
 
-`skill-snapshot/` contains a local copy of the skill files that were evaluated. The source of truth remains the `DefiLlama-Adapters` PR branch; the snapshot is included here so reviewers can inspect the evaluated instructions alongside the eval findings.
+`skill-snapshot/` contains the skill files that were evaluated.
+
+The source of truth remains the `DefiLlama-Adapters` PR branch.
+
+The snapshot lets reviewers read the instructions next to the eval findings.

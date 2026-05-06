@@ -1,33 +1,65 @@
-# defillama-tvl-adapter-author Evaluation Evidence: Friendroom
+# defillama-tvl-adapter-author eval: Friendroom
 
-## Eval Summary
+## Eval summary
 
-This evaluation tested whether the `defillama-tvl-adapter-author` skill helped an agent add Friendroom TVL support in `DefiLlama-Adapters` without using git history to rediscover the previous implementation.
+This eval used a known adapter as a control.
 
-Name note: the run used the skill's original name, `defillama-adapter-author`. The skill was renamed to `defillama-tvl-adapter-author` before PR review for clearer TVL scope.
+Friendroom already existed in `DefiLlama-Adapters`. We deleted its adapter file in a separate worktree, then asked an agent to add it back without git/history commands.
 
-Outcome: functionally correct. The agent created a simple native ETH owner-balance adapter, ran the correct `node test.js projects/friendroom/index.js` validation command, and produced PR metadata with unknowns left as TODOs.
+The result was functionally correct.
 
-Evidence framing:
+The agent used a simple native ETH owner-balance helper, ran `node test.js projects/friendroom/index.js`, and left unknown PR metadata as TODO.
+
+Evidence:
 
 - Functional result: Verified locally.
 - Workflow claims: Transcript evidence.
 - Code-change screenshot: Screenshot evidence.
 - Internal no-git-history compliance: Transcript evidence only, not independently proven.
 
-Important nuance: exact golden reconstruction is not the goal for this eval. The agent used `sumTokensExport({ owner, tokens: [nullAddress] })` instead of the original explicit async `sumTokens2` implementation. This is equivalent and valid repo style for a simple owner/native-token balance adapter.
+Exact golden reconstruction was not the goal.
 
-## Skill Version / Source
+The agent used `sumTokensExport({ owner, tokens: [nullAddress] })` instead of the original async `sumTokens2` wrapper. That is equivalent for this adapter.
 
-- Skill name: `defillama-tvl-adapter-author`
+## Eval fixture
+
+Before the eval, this file was deleted from the eval worktree:
+
+```text
+projects/friendroom/index.js
+```
+
+Eval worktree:
+
+```text
+/Users/azeemshaik/work/opensource/DefiLlama-Adapters-skill-eval
+```
+
+The prompt gave the agent the protocol facts: chain, contract address, and methodology.
+
+The prompt also banned git/history commands used to discover or restore old code.
+
+Allowed evidence was current repo files, helpers, examples, and tests.
+
+This setup gives a fair comparison point without asking for an exact copy.
+
+No-git-history compliance is transcript evidence only unless direct tool logs are available.
+
+## Skill version and source
+
+- Skill name during eval: `defillama-adapter-author`
+- Final PR skill name: `defillama-tvl-adapter-author`
 - Source repo: `/Users/azeemshaik/work/opensource/DefiLlama-Adapters`
-- Source repo HEAD during rename update: `ddffda85f`
-- Skill path: `/Users/azeemshaik/work/opensource/DefiLlama-Adapters/skills/defillama-tvl-adapter-author/SKILL.md`
+- Source repo HEAD after rename: `ddffda85f`
+- Skill path during eval: `/Users/azeemshaik/work/opensource/DefiLlama-Adapters/skills/defillama-adapter-author/SKILL.md`
+- Final PR skill path: `/Users/azeemshaik/work/opensource/DefiLlama-Adapters/skills/defillama-tvl-adapter-author/SKILL.md`
 - Eval worktree: `/Users/azeemshaik/work/opensource/DefiLlama-Adapters-skill-eval`
 - Evidence note date: 2026-05-06
-- Version: local draft skill, not a published/tagged release
+- Version: local PR skill, not a published/tagged release
 
-## Prompt Given To Agent
+Name note: this run used the original skill name in the prompt. The skill was renamed before PR review for clearer TVL scope.
+
+## Prompt given to agent
 
 ```text
 Use the defillama-adapter-author skill.
@@ -66,9 +98,9 @@ Please:
    - whether you obeyed the no-git-history constraint
 ```
 
-## Agent Output
+## Agent output
 
-Transcript evidence supplied by the evaluator:
+Transcript evidence:
 
 ```text
 Implemented Friendroom’s TVL adapter.
@@ -156,9 +188,9 @@ TODO
 I obeyed the no-git-history constraint. I did not use git diff, git show, git log, git reflog, git checkout, git restore, or any history/restore command. I only used git status --short, as allowed. Note: the workspace already had unrelated registries/erc4626.js and untracked defillama-adapter-author/ changes; I left those alone.
 ```
 
-## Expected Golden Implementation
+## Expected golden implementation
 
-Golden original from the real repo:
+Original implementation from the real repo:
 
 ```js
 const { sumTokens2, nullAddress } = require('../helper/unwrapLPs')
@@ -177,17 +209,25 @@ module.exports = {
 }
 ```
 
-## Screenshot Evidence
+## Screenshot evidence
 
-Supporting screenshot supplied by the evaluator:
+Screenshot supplied by the evaluator:
 
 - [Friendroom adapter implementation](../artifacts/screenshots/friendroom-adapter-implementation.png)
 
-Screenshot evidence supports the file-level implementation difference: the eval agent used `sumTokensExport` instead of the original explicit `sumTokens2` function. The screenshot does not by itself prove command history or validation output.
+The screenshot shows the adapter-file context and the implementation difference.
 
-## Locally Verified Result
+It shows `sumTokensExport` instead of the original explicit `sumTokens2` function.
 
-Verified locally in `/Users/azeemshaik/work/opensource/DefiLlama-Adapters-skill-eval`.
+It does not prove command history or validation output.
+
+## Locally verified result
+
+Checked locally in:
+
+```text
+/Users/azeemshaik/work/opensource/DefiLlama-Adapters-skill-eval
+```
 
 Current implementation:
 
@@ -204,7 +244,7 @@ module.exports = {
 }
 ```
 
-Local verification:
+Local checks:
 
 - File present: `projects/friendroom/index.js`
 - Pattern: simple native ETH owner-balance adapter
@@ -216,30 +256,30 @@ Local verification:
 - Package or lockfile changes: none observed in `package.json`, `package-lock.json`, `pnpm-lock.yaml`, or `pnpm-workspace.yaml`
 - Functional verdict: correct
 
-## Actual Files Changed
+## Actual files changed
 
-Current worktree tracked diffs:
+Current tracked diffs:
 
 ```text
 projects/friendroom/index.js
 registries/erc4626.js
 ```
 
-Friendroom-specific relevant change:
+Friendroom change:
 
 - `projects/friendroom/index.js`: added a native ETH owner-balance TVL adapter using `sumTokensExport`.
 
-Current worktree also contains Twoxswap changes from the first eval and an unrelated untracked directory:
+The worktree also contains Twoxswap changes from the first eval and one untracked directory:
 
 ```text
 ?? defillama-adapter-author/
 ```
 
-The untracked directory is treated as workspace noise per evaluator instruction unless separate evidence shows an eval agent created it.
+We treat the untracked directory as workspace noise unless separate evidence shows an eval agent created it.
 
-## Validation Output
+## Validation output
 
-Fresh local validation run:
+Fresh local validation:
 
 ```bash
 node test.js projects/friendroom/index.js
@@ -263,7 +303,9 @@ ethereum                  4.18 k
 total                    4.18 k 
 ```
 
-The transcript-reported value was around `$4.17k`; the small difference is consistent with live pricing or timing differences.
+The transcript value was around `$4.17k`.
+
+The local run showed `$4.18k`. That small difference is expected for live pricing or timing.
 
 ## Rubric
 
@@ -278,16 +320,22 @@ The transcript-reported value was around `$4.17k`; the small difference is consi
 | PR-readiness behavior | 4/5 | Transcript evidence: agent drafted PR metadata and used TODO for unknowns. It included current TVL from the local test. |
 | Forbidden-action avoidance | Pass with caveat | Verified locally: no package/lockfile changes. No-git-history compliance is transcript evidence only and not independently proven. |
 
-## Issues / Nuances
+## Issues and notes
 
-- The implementation is not an exact golden reconstruction. It uses `sumTokensExport` rather than a hand-written async `tvl` wrapper around `sumTokens2`.
-- This difference is acceptable for the eval: the adapter is functionally correct, concise, repo-style-valid, and `node test.js projects/friendroom/index.js` passes.
-- The methodology string in code is less address-specific than the golden implementation, but the PR metadata transcript includes the contract address in the methodology draft.
+- The implementation is not an exact copy of the original.
+- It uses `sumTokensExport` instead of a hand-written async `tvl` wrapper around `sumTokens2`.
+- This is acceptable here.
+- The adapter is functionally correct, concise, follows repo style, and `node test.js projects/friendroom/index.js` passes.
+- The code methodology is less address-specific than the original.
+- The PR metadata transcript includes the contract address in its methodology draft.
 - Internal no-git-history compliance cannot be independently proven from local files. Treat the agent's statement as transcript evidence.
-- The eval worktree contains unrelated dirty state: `?? defillama-adapter-author/`. This should be excluded from any PR-like cleanup unless separately explained.
+- The eval worktree contains unrelated dirty state: `?? defillama-adapter-author/`.
+- That directory should stay out of PR cleanup unless separately explained.
 
 ## Verdict
 
-Friendroom is a clean functional pass. The skill appears to have steered the agent toward the right DefiLlama workflow: validate repo fit, choose a simple native-token owner-balance helper, run the adapter-specific `node test.js` command, avoid package changes, and leave unknown PR metadata as TODO.
+Friendroom passed.
 
-Together with the Twoxswap cleaner evaluation, this is useful evidence that `defillama-tvl-adapter-author` improves agent behavior. Exact golden reconstruction is not the goal; correct repo-native behavior is.
+The agent chose a simple native-token owner-balance helper. It ran the right test. It did not touch package files. It left unknown PR fields as TODO.
+
+This is the behavior we wanted to test.
