@@ -1,6 +1,8 @@
-# DefiLlama Adapter Author Eval Evidence
+# DefiLlama TVL Adapter Author Evaluation Evidence
 
-This repository contains the evidence pack for evaluating the `defillama-adapter-author` agent skill for `DefiLlama/DefiLlama-Adapters`.
+This repository contains the evidence pack for evaluating the `defillama-tvl-adapter-author` agent skill for `DefiLlama/DefiLlama-Adapters`.
+
+Note: these evaluations were run while the skill still used its original name, `defillama-adapter-author`. It was renamed to `defillama-tvl-adapter-author` before PR review to make the TVL scope explicit.
 
 The evals focus on whether the skill helps an agent behave like a good DefiLlama adapter contributor:
 
@@ -52,10 +54,9 @@ Internal no-git-history compliance is treated as transcript evidence unless dire
 │   └── 03-invalid-fees-revenue.md
 └── skill-snapshot/
     ├── README.md
-    └── defillama-adapter-author/
+    └── defillama-tvl-adapter-author/
 ```
 
 ## Skill Snapshot
 
 `skill-snapshot/` contains a local copy of the skill files that were evaluated. The source of truth remains the `DefiLlama-Adapters` PR branch; the snapshot is included here so reviewers can inspect the evaluated instructions alongside the eval findings.
-

@@ -1,9 +1,9 @@
 ---
-name: defillama-adapter-author
-description: Validates whether a DefiLlama request belongs in DefiLlama-Adapters, then helps coding agents create and validate TVL adapters when it does. Use when a user wants to add a new DefiLlama protocol listing, check repo fit, create or fix a TVL adapter, choose adapter helpers or registries, validate `node test.js`, prepare PR metadata, or understand whether they should instead look at dimension-adapters, defillama-server, or liquidations.
+name: defillama-tvl-adapter-author
+description: Validates whether a DefiLlama request belongs in DefiLlama-Adapters, then helps coding agents create and validate TVL adapters when it does. Use when a user wants to add a new DefiLlama TVL protocol listing, check repo fit, create or fix a TVL adapter, choose adapter helpers or registries, validate `node test.js`, prepare PR metadata, or understand whether they should instead look at dimension-adapters, defillama-server, or liquidations.
 ---
 
-# DefiLlama Adapter Author
+# DefiLlama TVL Adapter Author
 
 Use this skill to help a protocol developer add or inspect a DefiLlama TVL adapter with high-quality repo-native judgment. Optimize for new TVL adapters, but support narrow fixes to existing adapters when the user asks.
 

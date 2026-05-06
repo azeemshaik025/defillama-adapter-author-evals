@@ -1,8 +1,10 @@
-# defillama-adapter-author Eval Evidence: Friendroom
+# defillama-tvl-adapter-author Evaluation Evidence: Friendroom
 
 ## Eval Summary
 
-This eval tested whether the `defillama-adapter-author` skill helped an agent add Friendroom TVL support in `DefiLlama-Adapters` without using git history to rediscover the previous implementation.
+This evaluation tested whether the `defillama-tvl-adapter-author` skill helped an agent add Friendroom TVL support in `DefiLlama-Adapters` without using git history to rediscover the previous implementation.
+
+Name note: the run used the skill's original name, `defillama-adapter-author`. The skill was renamed to `defillama-tvl-adapter-author` before PR review for clearer TVL scope.
 
 Outcome: functionally correct. The agent created a simple native ETH owner-balance adapter, ran the correct `node test.js projects/friendroom/index.js` validation command, and produced PR metadata with unknowns left as TODOs.
 
@@ -17,10 +19,10 @@ Important nuance: exact golden reconstruction is not the goal for this eval. The
 
 ## Skill Version / Source
 
-- Skill name: `defillama-adapter-author`
+- Skill name: `defillama-tvl-adapter-author`
 - Source repo: `/Users/azeemshaik/work/opensource/DefiLlama-Adapters`
-- Source repo HEAD during note update: `2b5d8bcb6`
-- Skill path: `/Users/azeemshaik/work/opensource/DefiLlama-Adapters/skills/defillama-adapter-author/SKILL.md`
+- Source repo HEAD during rename update: `ddffda85f`
+- Skill path: `/Users/azeemshaik/work/opensource/DefiLlama-Adapters/skills/defillama-tvl-adapter-author/SKILL.md`
 - Eval worktree: `/Users/azeemshaik/work/opensource/DefiLlama-Adapters-skill-eval`
 - Evidence note date: 2026-05-06
 - Version: local draft skill, not a published/tagged release
@@ -288,4 +290,4 @@ The transcript-reported value was around `$4.17k`; the small difference is consi
 
 Friendroom is a clean functional pass. The skill appears to have steered the agent toward the right DefiLlama workflow: validate repo fit, choose a simple native-token owner-balance helper, run the adapter-specific `node test.js` command, avoid package changes, and leave unknown PR metadata as TODO.
 
-Together with the Twoxswap cleaner eval, this is useful evidence that `defillama-adapter-author` improves agent behavior. Exact golden reconstruction is not the goal; correct repo-native behavior is.
+Together with the Twoxswap cleaner evaluation, this is useful evidence that `defillama-tvl-adapter-author` improves agent behavior. Exact golden reconstruction is not the goal; correct repo-native behavior is.

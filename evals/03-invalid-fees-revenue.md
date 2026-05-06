@@ -1,8 +1,10 @@
-# defillama-adapter-author Eval Evidence: Invalid Fees/Revenue Request
+# defillama-tvl-adapter-author Evaluation Evidence: Invalid Fees/Revenue Request
 
 ## Eval Summary
 
-This eval tested whether the `defillama-adapter-author` skill stops an agent before coding when the request does not belong in `DefiLlama-Adapters`.
+This evaluation tested whether the `defillama-tvl-adapter-author` skill stops an agent before coding when the request does not belong in `DefiLlama-Adapters`.
+
+Name note: the run used the skill's original name, `defillama-adapter-author`. The skill was renamed to `defillama-tvl-adapter-author` before PR review for clearer TVL scope.
 
 Outcome: pass. The agent identified protocol fees and revenue as out of scope for this TVL adapter repo, suggested `DefiLlama/dimension-adapters`, and reported that it made no edits.
 
@@ -133,4 +135,4 @@ This invalid-request eval passed.
 
 The agent correctly refused to implement fees/revenue support in `DefiLlama-Adapters`, stopped before coding, and suggested the right DefiLlama repo/path to investigate: `DefiLlama/dimension-adapters`, likely under fees-related adapter paths.
 
-This is valuable evidence that `defillama-adapter-author` protects developers from wrong-repo work, not just that it can help produce valid TVL adapters.
+This is valuable evidence that `defillama-tvl-adapter-author` protects developers from wrong-repo work, not just that it can help produce valid TVL adapters.
