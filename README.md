@@ -15,8 +15,8 @@ The evals focus on whether the skill helps an agent behave like a good DefiLlama
 
 | Eval | Scenario | Result | Evidence note |
 | --- | --- | --- | --- |
-| 1 | Twoxswap ERC4626 vault TVL reconstruction | Pass | [01-twoxswap-erc4626.md](evals/01-twoxswap-erc4626.md) |
-| 2 | Friendroom native ETH owner-balance TVL reconstruction | Pass | [02-friendroom-native-eth.md](evals/02-friendroom-native-eth.md) |
+| 1 | Twoxswap ERC4626 vault TVL authoring | Pass | [01-twoxswap-erc4626.md](evals/01-twoxswap-erc4626.md) |
+| 2 | Friendroom native ETH owner-balance TVL authoring | Pass | [02-friendroom-native-eth.md](evals/02-friendroom-native-eth.md) |
 | 3 | Invalid fees/revenue request repo-fit gate | Pass | [03-invalid-fees-revenue.md](evals/03-invalid-fees-revenue.md) |
 
 ## High-Level Verdict
